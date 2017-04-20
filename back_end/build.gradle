@@ -1,0 +1,44 @@
+group 'com.globant'
+version '1.0-SNAPSHOT'
+
+buildscript {
+
+    ext.kotlinVersion = '1.1.1'
+    ext.springDataMongodbVersion = '1.10.1.RELEASE'
+    ext.springBootGradlePlugin = '1.5.2.RELEASE'
+    ext.jodaVersion = '1.1.0'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootGradlePlugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion")
+    }
+
+}
+
+apply {
+    plugin("kotlin")
+    plugin("kotlin-spring")
+    plugin("org.springframework.boot")
+}
+
+repositories {
+    mavenCentral()
+//    jcenter()
+}
+
+dependencies {
+    compile("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    compile("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.data:spring-data-mongodb:$springDataMongodbVersion")
+    compile('com.fasterxml.jackson.module:jackson-module-kotlin') //allows to deal with data classes with no default constructor or with Kotlin collections
+//    compile("com.github.debop:koda-time:$jodaVersion")
+    compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
